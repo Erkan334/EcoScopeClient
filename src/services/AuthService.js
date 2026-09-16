@@ -8,3 +8,15 @@ const api = axios.create({
 export async function loginWithCookies(email, password){
     await api.post("/login?useCookies=true", {email, password});
 }
+
+export async function checkAuthentication(){
+    try{
+        await api.get("manage/info")
+        return true;
+    }
+    catch(error){
+        if(error.response.status === 401){
+            return false;
+        }
+    }
+}
