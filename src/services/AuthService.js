@@ -20,3 +20,7 @@ export async function checkAuthentication(){
         }
     }
 }
+
+export async function registerUser(email, password){
+    await api.post("/register", {email, password})
+}

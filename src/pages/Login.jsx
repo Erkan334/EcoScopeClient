@@ -1,15 +1,20 @@
 import { useState } from "react"
 import { loginWithCookies } from "../services/AuthService";
+import { useNavigate } from "react-router";
 
 export default function Login(){
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const navigate = useNavigate();
+
     async function handleSubmit(e){
         e.preventDefault();
 
         await loginWithCookies(email, password);
+
+        navigate("/");
     }
     
     return(

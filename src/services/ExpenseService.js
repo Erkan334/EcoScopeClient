@@ -5,6 +5,12 @@ const api = axios.create({
     withCredentials: true,
 });
 
+export const getAllExpenses = async () => {
+    const response = await api.get("expenses/all")
+
+    return response.data;
+}
+
 export const createExpense = async (expense) => {
     const response = await api.post("expenses/create", expense);
 
