@@ -3,7 +3,7 @@ import { registerUser } from "../services/AuthService";
 import { useNavigate } from "react-router";
 
 export default function Register(){
-    
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 

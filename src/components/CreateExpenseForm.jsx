@@ -1,5 +1,6 @@
 import { createExpense } from "../services/ExpenseService";
 import { useState } from "react";
+import { TextField, Select, MenuItem, FormControl, InputLabel, Button, Typography } from "@mui/material";
 
 
 export default function CreateExpenseForm(){
@@ -28,36 +29,50 @@ export default function CreateExpenseForm(){
 
     
     return(
-        <form onSubmit={handleSubmit}>
-            <h2>Title</h2>
-            <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ex. Gym" required></input>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
-            <h2>Cost</h2>
-            <input type="number" name="costAmount" value={costAmount} onChange={(e) => setCostAmount(e.target.value)} placeholder="Ex. 250" required></input>
+            <Typography variant="h3" className="text-center">Create Expense</Typography>
 
-            <h2>Billing frequency</h2>
-            <select name="billingFrequency" value={billingFrequency} onChange={(e) => setBillingFrequency(e.target.value)} required>
-                <option value="">Select billing frequency</option>
-                <option value="0">OneTime</option>
-                <option value="1">Weekly</option>
-                <option value="2">Monthly</option>
-                <option value="3">Yearly</option>
-            </select>
-            
-            <h2>Category</h2>
-            <select name="categoryId" value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required>
-                <option value="">Select category</option>
-                <option value="1">Rent</option>
-                <option value="2">Groceries</option>
-                <option value="3">Transport</option>
-                <option value="4">Clothing</option>
-                <option value="5">Saving</option>
-                <option value="6">Miscellaneous</option>
-                <option value="7">Loan</option>
-                <option value="8">Subscription</option>
-            </select>
+            <section className="w-full flex flex-col gap-4">
 
-            <button type="submit">Create Expense</button>
+            {/* Title */}
+            <TextField required id="title" type="text" label="Title" defaultValue={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ex. Gym"></TextField>
+
+
+            {/* Cost */}
+            <TextField required id="costAmount" type="number" label="Cost" defaultValue={costAmount} onChange={(e) => setCostAmount(e.target.value)} placeholder="Ex. 250"></TextField>
+
+
+            {/* Billing */}
+            <FormControl fullWidth>
+                <InputLabel id="billingFrequencyLabel">Billing frequency</InputLabel>
+                <Select name="billingFrequency" value={billingFrequency} onChange={(e) => setBillingFrequency(e.target.value)} required labelId="billingFrequencyLabel" label="BillingFrequency">
+                    <MenuItem value="0">OneTime</MenuItem>
+                    <MenuItem value="1">Weekly</MenuItem>
+                    <MenuItem value="2">Monthly</MenuItem>
+                    <MenuItem value="3">Yearly</MenuItem>
+                </Select>
+            </FormControl>
+
+
+            {/* Category */}
+            <FormControl fullWidth>
+                <InputLabel id="categoryLabel">Category</InputLabel>
+                <Select name="categoryId" value={categoryId} onChange={(e) => setCategoryId(e.target.value)} required labelId="categoryLabel" label="Category">
+                    <MenuItem value="1">Rent</MenuItem>
+                    <MenuItem value="2">Groceries</MenuItem>
+                    <MenuItem value="3">Transport</MenuItem>
+                    <MenuItem value="4">Clothing</MenuItem>
+                    <MenuItem value="5">Saving</MenuItem>
+                    <MenuItem value="6">Miscellaneous</MenuItem>
+                    <MenuItem value="7">Loan</MenuItem>
+                    <MenuItem value="8">Subscription</MenuItem>
+                </Select>
+            </FormControl>
+
+            </section>
+            <Button variant="contained" type="submit" className="w-1/3 self-center">Create Expense</Button>
+
             
             
         </form>

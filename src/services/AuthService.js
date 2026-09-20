@@ -24,3 +24,7 @@ export async function checkAuthentication(){
 export async function registerUser(email, password){
     await api.post("/register", {email, password})
 }
+
+export async function logout(){
+    await api.post("/Auth/logout")
+}
