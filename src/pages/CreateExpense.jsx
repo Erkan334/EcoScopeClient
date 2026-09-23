@@ -1,7 +1,7 @@
-import CreateExpenseForm from "../components/CreateExpenseForm";
+// import CreateExpenseForm from "../components/CreateExpenseForm";
 
-export default function CreateExpense(){
-    return(
-        <CreateExpenseForm />
-    )
-}
+// export default function CreateExpense(){
+//     return(
+//         <CreateExpenseForm />
+//     )
+// }
