@@ -1,49 +1,57 @@
 import { useState } from 'react';
+import EditIcon from "@mui/icons-material/Edit";
+import { updateExpense } from '../services/ExpenseService';
+import {
+  Typography,
+  TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Box,
+  Button,
+  Modal
+} from "@mui/material";
 
 
-import { createExpense } from "../services/ExpenseService";
-import { TextField, Select, MenuItem, FormControl, InputLabel, Button, Typography, Box, Modal } from "@mui/material";
 
 
-
-export default function CreateExpenseModal({onCreate}) {
+export default function UpdateExpenseModal({expenseId, expense, onUpdate}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const[title, setTitle] = useState("");
-  const[costAmount, setCostAmount] = useState("");
-  const[billingFrequency, setBillingFrequency] = useState("");
-  const[categoryId, setCategoryId] = useState("");
+
+    const[title, setTitle] = useState(expense.title);
+    const[costAmount, setCostAmount] = useState(expense.costAmount);
+    const[billingFrequency, setBillingFrequency] = useState(expense.billingFrequency);
+    const[categoryId, setCategoryId] = useState(expense.categoryId);
 
 
   async function handleSubmit(e) {
-        e.preventDefault();
-        
-        try{
-            const newExpense = {title, costAmount: parseFloat(costAmount), billingFrequency, categoryId};
-            await createExpense(newExpense);
+          e.preventDefault();
+          
+          try{
+              const expenseData = {title, costAmount: parseFloat(costAmount), billingFrequency, categoryId};
 
-            onCreate();
-            handleClose();
 
-            setTitle("");
-            setCostAmount("");
-            setBillingFrequency("");
-            setCategoryId("");
-            
-        }
-        catch(error){
-            console.log("Error creating expense:", error)
-        }
+              await updateExpense(expenseId, expenseData);
+                
 
-        
-    }
+                    onUpdate();
+                    handleClose();
+                }
 
+          catch(error){
+              console.log("Error editing expense:", error)
+          }
+  
+          
+      }
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleOpen}>Add Expense</Button>
+      <Button variant="" onClick={handleOpen}><EditIcon/></Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -51,11 +59,11 @@ export default function CreateExpenseModal({onCreate}) {
   }}
         className=" flex flex-col justify-center items-center">
 
-        <Box className="w-1/3 bg-white shadow-2xl transform-100 rounded-2xl border border-solid border-gray-300 p-4 overflow-hidden">
-          {/* <CreateExpenseForm/> */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+        <Box className="w-1/3 bg-white shadow-2xl rounded-2xl border border-solid border-gray-300 p-4 overflow-hidden">
 
-            <Typography variant="h3" className="text-center">Create Expense</Typography>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+
+            <Typography variant="h3" className="text-center">{`Edit ${expense.title}`}</Typography>
 
             <section className="w-full flex flex-col gap-4">
 
@@ -95,7 +103,7 @@ export default function CreateExpenseModal({onCreate}) {
             </FormControl>
 
             </section>
-            <Button variant="contained" type="submit" className="w-1/3 self-center">Create Expense</Button>
+            <Button variant="contained" type="submit" className="w-1/3 self-center">Save</Button>
 
             
             

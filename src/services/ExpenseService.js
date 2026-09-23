@@ -18,7 +18,13 @@ export const createExpense = async (expense) => {
 }
 
 export const removeExpense = async (expenseId) => {
-    const response = await api.delete("expenses/{expenseId}/remove", expenseId);
+    const response = await api.delete(`expenses/${expenseId}/remove`);
+
+    return response.data;
+}
+
+export const updateExpense = async (expenseId, expense) => {
+    const response = await api.put(`expenses/${expenseId}/update`, expense);
 
     return response.data;
 }

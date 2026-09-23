@@ -1,6 +1,6 @@
 import { ExpenseList } from "../components/ExpenseList"
-import ExpenseModal from "../components/CreateExpenseModal"
 import Navbar from "../components/Navbar"
+import ExpensePieChart from "../components/ExpensePieChart"
 
 export default function Home(){
     return(
@@ -10,10 +10,10 @@ export default function Home(){
             </header>
 
             <main className="border border-solid">
-                    <section className="flex flex-col items-center bg-gray-500">
+                    <section className="flex flex-col items-center bg-gray-500 gap-25">
                         <ExpenseList/>
-                        <ExpenseModal/>
-                </section>
+                        <ExpensePieChart/>
+                    </section>
             </main>
 
         </>
