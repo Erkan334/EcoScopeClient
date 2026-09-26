@@ -28,3 +28,11 @@ export async function registerUser(email, password){
 export async function logout(){
     await api.post("/Auth/logout")
 }
+
+export async function getUserRole(){
+    const response = await api.get("/Auth/me/role");
+
+    console.log("ROLE RESPONSE:", response.data);
+
+    return response.data;
+}

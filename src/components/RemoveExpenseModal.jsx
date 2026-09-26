@@ -42,11 +42,11 @@ export default function RemoveExpenseModal({ expenseId, onRemove, expenseTitle }
           </Typography>
 
           <section className="flex justify-evenly gap-2 mt-4">
-            <Button onClick={handleConfirmRemove}>
+            <Button onClick={handleConfirmRemove} variant="outlined" sx={{color: "red", borderColor: "red"}}>
               Remove
             </Button>
 
-            <Button onClick={handleClose}>
+            <Button onClick={handleClose} variant="outlined">
               Cancel
             </Button>
           </section>

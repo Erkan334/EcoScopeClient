@@ -1,9 +1,10 @@
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router";
-import { logout } from "../services/AuthService";
+import { useAuth } from "../context/AuthContext";
 
 export default function LogoutButton() {
     const navigate = useNavigate();
+    const { logout } = useAuth();
 
     async function handleLogout() {
         try {
@@ -15,7 +16,7 @@ export default function LogoutButton() {
     }
 
     return (
-        <Button onClick={handleLogout}>
+        <Button onClick={handleLogout} sx={{color: "white", }}>
             Logout
         </Button>
     );

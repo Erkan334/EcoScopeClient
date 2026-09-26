@@ -6,11 +6,10 @@ export default function Home(){
     return(
         <>
             <header>
-                <Navbar/>
             </header>
 
-            <main className="border border-solid">
-                    <section className="flex flex-col items-center bg-gray-500 gap-25">
+            <main className="border border-solid h-[90vh] bg-[#0f172a]">
+                    <section className="flex flex-col items-center gap-25">
                         <ExpenseList/>
                         <ExpensePieChart/>
                     </section>

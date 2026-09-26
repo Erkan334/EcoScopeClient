@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import { useAuth } from "../context/AuthContext";
 
 
-export default function ProtectedRoute({children}){
-    const {isLoggedIn, loading} = useAuth();
+export default function AdminProtectedRoute({children}){
+    const {isLoggedIn, loading, isAdmin} = useAuth();
 
 
     if(loading){
@@ -17,6 +17,11 @@ export default function ProtectedRoute({children}){
     if(!isLoggedIn){
         return <Navigate to="/login"/>
     }
+
+    if(!isAdmin){
+        return <Navigate to="/"/>
+    }
+    console.log("ADMIN CHECK:", isLoggedIn, loading, isAdmin);
 
 
     return children;

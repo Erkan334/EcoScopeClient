@@ -9,22 +9,20 @@ import {
   Typography,
   Link,
 } from "@mui/material";
-import { useAuth } from "../context/AuthContext";
-
-export default function LoginForm(){
+import { loginWithCookies, registerUser } from "../services/AuthService";
+export default function RegisterForm(){
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { login } = useAuth();
 
     const navigate = useNavigate();
 
     async function handleSubmit(e){
         e.preventDefault();
 
-        await login(email, password);
-
-        navigate("/home");
+        await registerUser(email, password);
+        await loginWithCookies(email, password);
+        navigate("/username");
     }
     
     return(
@@ -55,17 +53,9 @@ export default function LoginForm(){
                 textAlign="center"
                 gutterBottom
                 >
-                Log in
+                Register account
                 </Typography>
 
-                <Typography
-                variant="body2"
-                color="text.secondary"
-                textAlign="center"
-                sx={{ mb: 3 }}
-                >
-                Log in to your account
-                </Typography>
 
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
                 <TextField
@@ -102,17 +92,17 @@ export default function LoginForm(){
                     fontWeight: 600,
                     }}
                 >
-                    Log in
+                    Register
                 </Button>
 
                 <Typography textAlign="center" variant="body2">
-                    Don't have an account?{" "}
+                    Already have an account?{" "}
                     <Link
-                    href="/register"
+                    href="/login"
                     underline="hover"
                     sx={{ fontWeight: 600 }}
                     >
-                    Register
+                    Login
                     </Link>
                 </Typography>
                 </Box>
