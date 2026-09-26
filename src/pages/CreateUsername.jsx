@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router";
 import { createUsername } from "../services/UserService";
+import { TextField, Button, Box, Card, CardContent, Typography, Link } from "@mui/material";
+
 
 export default function CreateUsername(){
     
@@ -12,20 +14,38 @@ export default function CreateUsername(){
         e.preventDefault();
 
         await createUsername(name);
+        navigate("/home")
 
-        navigate("/")
-
-        
     }
     
     return(
-        <form onSubmit={handleSubmit}>
-            <h1>Whats your name?</h1>
+        <main className="w-full flex flex-col justify-center items-center border border-solid bg-[#0f172a]">
+            <form onSubmit={handleSubmit}>
+                <Box sx={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center"}}>
 
-            <h2>Username</h2>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="ex. Hugo"/>
+                        <Card elevation={4} sx={{ width: "100%", maxWidth: 420, borderRadius: 3,}}>
 
-            <button type="submit">Set name</button>
-        </form>
+                            <CardContent sx={{ p: 4 }}>
+
+                                <Typography variant="h4" component="h1" fontWeight={700} textAlign="center" gutterBottom >
+                                Whats your name?
+                                </Typography>
+
+                                <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+
+                                    <TextField fullWidth type="text" label="Name" value={name} onChange={(e) => setName(e.target.value)} placeholder="ex. John..."/>
+
+                            
+
+                                    <Button type="submit" variant="contained" size="large" fullWidth sx={{ mt: 1, py: 1.4, borderRadius: 2, textTransform: "none", fontSize: "1rem", fontWeight: 600, }}>
+                                    Continue
+                                    </Button>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                </Box>
+            </form>
+
+        </main>
     )
 }

@@ -1,32 +1,29 @@
 import { Link } from "react-router";
-import LogoutButton from "./LogoutButton";
-import { checkAuthentication } from "../services/AuthService";
-import { useState, useEffect } from "react";
 import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton"
+import { useAuth } from "../context/AuthContext";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router";
 
 export default function Navbar() {
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { isLoggedIn, loading, isAdmin } = useAuth();
 
-    useEffect(() => {
-        async function handleAuthCheck() {
-            const authenticated = await checkAuthentication();
+    const navigate = useNavigate();
 
-            setIsLoggedIn(authenticated);
-        }
-
-        handleAuthCheck();
-    }, []);
 
     return (
-        <nav className="flex items-center justify-between border-b px-6 py-4">
-            <Link to="/" className="text-xl font-bold">
+        <nav className="flex items-center justify-between px-6 py-4 bg-[#1e293b]">
+            <Link to="/" className="text-xl font-bold text-white">
                 EcoScope
             </Link>
 
             <div className="flex items-center gap-4">
+                {isAdmin && (
+                    <Button onClick={() => navigate("/admin")} sx={{color: "white"}}>Admin-Panel</Button>
+                )}
 
-                {isLoggedIn ? <LogoutButton/> : <LoginButton/>}
+                {!loading && (isLoggedIn ? <LogoutButton/> : <LoginButton/>)}
             </div>
         </nav>
     );

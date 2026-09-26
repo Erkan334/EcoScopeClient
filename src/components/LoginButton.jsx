@@ -6,7 +6,7 @@ export default function LoginButton() {
 
 
     return (
-        <Button onClick={() => navigate("/login")}>
+        <Button onClick={() => navigate("/login")} sx={{color: "white"}}>
             Login
         </Button>
     );

@@ -6,5 +6,14 @@ const api = axios.create({
 });
 
 export async function createUsername(name){
-    await api.put("/users/me/name", {name});
+    const response = await api.put("/users/me/name", {name});
+
+    return response.data;
+}
+
+
+export const getAllUsers = async () => {
+    const response = await api.get("users/all")
+
+    return response.data;
 }

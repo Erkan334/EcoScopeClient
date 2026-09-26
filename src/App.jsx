@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Routes, Route } from 'react-router'
+import Navbar from './components/Navbar'
 import LoginPage from './pages/Login'
 import HomePage from './pages/Home'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -7,20 +8,27 @@ import ProtectedRoute from './components/ProtectedRoute'
 import RegisterPage from './pages/Register'
 import CreateUsernamePage from './pages/CreateUsername'
 import LandingPage from './pages/LandingPage'
+import AdminPanel from './pages/AdminPanel'
+import AdminProtectedRoute from './components/AdminProtectedRoute'
 import './App.css'
 
 function App() {
 
   return (
+    <>
+    <Navbar />
+
     <Routes>
       <Route path='/' element={<LandingPage/>}/>
       <Route path='/home' element={<ProtectedRoute><HomePage/></ProtectedRoute>}/>
       {/* <Route path='/expense/create' element={<ProtectedRoute><CreateExpensePage/></ProtectedRoute>}/> */}
       <Route path='/username' element={<CreateUsernamePage/>}/>
+      <Route path='/admin' element={<AdminProtectedRoute><AdminPanel/></AdminProtectedRoute>}/>
       <Route path='/login' element={<LoginPage/>}/>
       <Route path='/register' element={<RegisterPage/>}/>
 
     </Routes>
+    </>
   )
 }
 
