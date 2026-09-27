@@ -10,10 +10,13 @@ import {
   Link,
 } from "@mui/material";
 import { loginWithCookies, registerUser } from "../services/AuthService";
+
+
 export default function RegisterForm(){
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
 
     const navigate = useNavigate();
 
@@ -23,6 +26,8 @@ export default function RegisterForm(){
         await registerUser(email, password);
         await loginWithCookies(email, password);
         navigate("/username");
+
+        
     }
     
     return(

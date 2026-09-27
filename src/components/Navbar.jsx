@@ -19,8 +19,10 @@ export default function Navbar() {
             </Link>
 
             <div className="flex items-center gap-4">
-                {isAdmin && (
+                {!loading && (isAdmin ?
                     <Button onClick={() => navigate("/admin")} sx={{color: "white"}}>Admin-Panel</Button>
+                    :
+                    <Button onClick={() => navigate("/home")} sx={{color: "white"}}>Dashboard</Button>
                 )}
 
                 {!loading && (isLoggedIn ? <LogoutButton/> : <LoginButton/>)}

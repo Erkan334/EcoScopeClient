@@ -33,6 +33,8 @@ export function AuthProvider({ children }) {
 
         const role = await getUserRole();
         setIsAdmin(role.isAdmin);
+
+        return role;
     }
 
     async function logout() {
