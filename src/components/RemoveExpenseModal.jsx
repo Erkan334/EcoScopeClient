@@ -36,7 +36,7 @@ export default function RemoveExpenseModal({ expenseId, onRemove, expenseTitle }
         }}
         className="flex flex-col justify-center items-center"
       >
-        <Box className="w-1/4 bg-white shadow-2xl rounded-2xl border border-gray-300 p-4 overflow-hidden flex flex-col text-center">
+        <Box className="w-full max-w-md max-h-[90vh] bg-white shadow-2xl rounded-2xl border border-gray-300 p-4 overflow-hidden flex flex-col text-center">
           <Typography>
             {`Are you sure you want to remove ${expenseTitle} as an expense?`}
           </Typography>

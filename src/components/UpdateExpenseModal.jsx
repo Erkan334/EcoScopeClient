@@ -59,7 +59,7 @@ export default function UpdateExpenseModal({expenseId, expense, onUpdate}) {
   }}
         className=" flex flex-col justify-center items-center">
 
-        <Box className="w-1/3 bg-white shadow-2xl rounded-2xl border border-solid border-gray-300 p-4 overflow-hidden">
+        <Box className="w-full max-w-md max-h-[90vh] bg-white shadow-2xl rounded-2xl border border-solid border-gray-300 p-4 overflow-hidden">
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
@@ -103,7 +103,7 @@ export default function UpdateExpenseModal({expenseId, expense, onUpdate}) {
             </FormControl>
 
             </section>
-            <Button variant="contained" type="submit" className="w-1/3 self-center">Save</Button>
+            <Button variant="contained" type="submit" className="w-full sm:w-1/3 self-center">Save</Button>
 
             
             

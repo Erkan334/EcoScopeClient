@@ -51,7 +51,7 @@ export default function CreateExpenseModal({onCreate}) {
   }}
         className=" flex flex-col justify-center items-center">
 
-        <Box className="w-1/3 bg-white shadow-2xl transform-100 rounded-2xl border border-solid border-gray-300 p-4 overflow-hidden">
+        <Box className="w-full max-w-md max-h-[90vh] bg-white shadow-2xl transform-100 rounded-2xl border border-solid border-gray-300 p-4 overflow-hidden">
           {/* <CreateExpenseForm/> */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
 
@@ -95,7 +95,7 @@ export default function CreateExpenseModal({onCreate}) {
             </FormControl>
 
             </section>
-            <Button variant="contained" type="submit" className="w-1/3 self-center">Create Expense</Button>
+            <Button variant="contained" type="submit" className="w-full sm:w-1/3 self-center">Create Expense</Button>
 
             
             
