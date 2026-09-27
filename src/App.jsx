@@ -11,6 +11,7 @@ import LandingPage from './pages/LandingPage'
 import AdminPanel from './pages/AdminPanel'
 import AdminProtectedRoute from './components/AdminProtectedRoute'
 import './App.css'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
       <Route path='/admin' element={<AdminProtectedRoute><AdminPanel/></AdminProtectedRoute>}/>
       <Route path='/login' element={<LoginPage/>}/>
       <Route path='/register' element={<RegisterPage/>}/>
+      <Route path='*' element={<NotFoundPage/>}/>
 
     </Routes>
     </>

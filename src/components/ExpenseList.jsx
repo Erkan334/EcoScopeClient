@@ -117,6 +117,8 @@ export function ExpenseList() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  
+
 
 
 
@@ -205,116 +207,146 @@ export function ExpenseList() {
   }
 
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - expenses.length) : 0;
-
-
+  
+  
   const visibleExpenses = useMemo(
     () =>
       [...expenses]
-        .sort(getComparator(order, orderBy))
-        .slice(
-          page * rowsPerPage,
-          page * rowsPerPage + rowsPerPage
-        ),
+    .sort(getComparator(order, orderBy))
+    .slice(
+      page * rowsPerPage,
+      page * rowsPerPage + rowsPerPage
+    ),
     [expenses, order, orderBy, page, rowsPerPage]
   );
+  
+  const emptyRows = Math.max(
+    0,
+    rowsPerPage - visibleExpenses.length
+    );
 
-
+    const totalCost = expenses.reduce(
+    (total, expense) => total + Number(expense.costAmount), 0);
+  
   return (
+    
     <Box className="w-full max-w-4xl mx-auto mt-8">
+      {expenses.length === 0 ? (
+        <>
+          <section className=" flex flex-col items-center text-4xl text-white gap-4">
+            <h2>You currently have no expenses</h2>
+            <CreateExpenseModal onCreate={refreshExpenseList}/>
 
-      <h2 className="text-2xl font-semibold mb-4 text-center text-white">
-        My Expenses
-      </h2>
+          </section>
+        </>
+      
+        ) : (
 
-      <Paper sx={{ width: "100%" }}>
+        <>
+          <h2 className="text-2xl font-semibold mb-4 text-center text-white">
+            My Expenses
+          </h2>
 
-        <TableContainer>
+          
 
-          <Table>
+          <Paper sx={{ width: "100%" }}>
 
-            <ExpenseTableHead
-              order={order}
-              orderBy={orderBy}
-              onRequestSort={handleRequestSort}
-              onCreate={refreshExpenseList}
-            />
+            <TableContainer>
 
-            <TableBody>
+              <Table>
 
-              {visibleExpenses.map((expense) => (
+                <ExpenseTableHead
+                  order={order}
+                  orderBy={orderBy}
+                  onRequestSort={handleRequestSort}
+                  onCreate={refreshExpenseList}
+                />
 
-                <TableRow key={expense.id}>
+                <TableBody>
 
-                  <TableCell>
-                    {expense.title}
-                  </TableCell>
+                  {visibleExpenses.map((expense) => (
 
-                  <TableCell align="right">
-                    {expense.costAmount} kr
-                  </TableCell>
+                    <TableRow key={expense.id}>
 
-                  <TableCell>
-                    {getBillingFrequency(
-                      expense.billingFrequency
-                    )}
-                  </TableCell>
+                      <TableCell>
+                        {expense.title}
+                      </TableCell>
 
-                  <TableCell>
-                    {expense.categoryTitle}
-                  </TableCell>
+                      <TableCell align="right">
+                        {expense.costAmount} kr
+                      </TableCell>
 
-                  {/* <TableCell align="right" className="border border-solid">
-                    <UpdateExpenseModal/>
-                  </TableCell> */}
+                      <TableCell>
+                        {getBillingFrequency(
+                          expense.billingFrequency
+                        )}
+                      </TableCell>
 
-                  <TableCell align="right">
-                    <Box className="flex flex-row justify-end">
-                      <UpdateExpenseModal
-                        expense={expense}
-                        expenseId={expense.id}
-                        onUpdate={refreshExpenseList}/>
+                      <TableCell>
+                        {expense.categoryTitle}
+                      </TableCell>
 
-                      <RemoveExpenseModal
-                        expenseId={expense.id}
-                        expenseTitle={expense.title}
-                        onRemove={handleRemove}/>
-                      </Box>
-                  </TableCell>
+                      {/* <TableCell align="right" className="border border-solid">
+                        <UpdateExpenseModal/>
+                      </TableCell> */}
 
-                </TableRow>
+                      <TableCell align="right">
+                        <Box className="flex flex-row justify-end">
+                          <UpdateExpenseModal
+                            expense={expense}
+                            expenseId={expense.id}
+                            onUpdate={refreshExpenseList}/>
 
-              ))}
+                          <RemoveExpenseModal
+                            expenseId={expense.id}
+                            expenseTitle={expense.title}
+                            onRemove={handleRemove}/>
+                          </Box>
+                      </TableCell>
 
-              {emptyRows > 0 && (
-                <TableRow
-                  style={{
-                    height: 53 * emptyRows,
-                  }}
-                >
-                  <TableCell colSpan={5} />
-                </TableRow>
-              )}
+                    </TableRow>
 
-            </TableBody>
+                  ))}
 
-          </Table>
+                  {emptyRows > 0 && (
+                    <TableRow
+                      style={{
+                        height: 53 * emptyRows,
+                      }}
+                    >
+                      <TableCell colSpan={5} />
+                    </TableRow>
+                  )}
 
-        </TableContainer>
+                </TableBody>
+
+              </Table>
+
+            </TableContainer>
 
 
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={expenses.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+            <Box className="flex items-center justify-between">
+              <p className="ml-4 text-sm">
+                Total cost: <span className="font-semibold">{totalCost.toFixed(2)} kr</span>
+              </p>
 
-      </Paper>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={expenses.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </Box>
+
+          </Paper>
+        </>
+
+      )}
+
+      
 
     </Box>
   );
